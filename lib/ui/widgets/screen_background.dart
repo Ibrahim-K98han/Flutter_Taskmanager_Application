@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../style/colors.dart';
 
 class ScreenBackgroun extends StatelessWidget {
-  final Widget widget;
-  ScreenBackgroun({super.key, required this.widget});
+  final Widget child;
+  ScreenBackgroun({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ScreenBackgroun extends StatelessWidget {
           height: screenSize.height,
           color: colorGreen.withOpacity(.1),
         ),
-        widget
+        child
       ],
     );
   }
