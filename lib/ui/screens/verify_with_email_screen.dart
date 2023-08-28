@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanager/ui/screens/sign_up_screen.dart';
-import 'package:taskmanager/ui/screens/verify_with_email_screen.dart';
-import 'package:taskmanager/ui/widgets/screen_background.dart';
+
 import '../../style/text_style.dart';
 import '../widgets/app_elevated_button.dart';
 import '../widgets/app_text_button.dart';
 import '../widgets/app_text_filed.dart';
+import '../widgets/screen_background.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class VerifyWithEmailScreen extends StatefulWidget {
+  const VerifyWithEmailScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<VerifyWithEmailScreen> createState() => _VerifyWithEmailScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _VerifyWithEmailScreenState extends State<VerifyWithEmailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Get Started With',
+                'Your Email Address',
                 style: Head1Text,
+              ),
+              Text(
+                'A 6 digits verification pin will be sent to your email address ',
+                style: Head15Text,
               ),
               const SizedBox(
                 height: 24,
@@ -35,14 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
               AppTextField(
                 controller: TextEditingController(),
                 hintText: 'Email',
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: AppTextField(
-                  hintText: 'Password',
-                  controller: TextEditingController(),
-                  obsecure: true,
-                ),
               ),
               const SizedBox(
                 height: 16,
@@ -54,23 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 24,
               ),
-              Center(
-                child: TextButton(
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const VerifyWithEmailScreen(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Forgot Password ?',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ),
               AppTextButton(
                 onTap: () {
                   Navigator.push(
@@ -81,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
                 text: 'Sign Up',
-                child: const Text('Don\'t Have an account? '),
+                child: const Text('Have account? '),
               ),
             ],
           ),

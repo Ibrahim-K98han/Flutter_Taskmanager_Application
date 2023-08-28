@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:taskmanager/ui/screens/login_screen.dart';
 import '../../style/text_style.dart';
 import '../widgets/app_elevated_button.dart';
+import '../widgets/app_text_button.dart';
 import '../widgets/app_text_filed.dart';
 import '../widgets/screen_background.dart';
-import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -75,11 +75,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: const Icon(Icons.arrow_circle_right_outlined),
               ),
               AppTextButton(
-                child: Text('Have Account ?'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
                 },
                 text: 'Sign In',
+                child: const Text('Have Account ?'),
               ),
             ],
           ),
