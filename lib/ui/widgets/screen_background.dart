@@ -14,7 +14,7 @@ class ScreenBackgroun extends StatelessWidget {
         Container(
           width: screenSize.width,
           height: screenSize.height,
-          color: colorGreen.withOpacity(.2),
+          color: colorGreen.withOpacity(.1),
         ),
         widget
       ],
