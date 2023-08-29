@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:taskmanager/ui/screens/login_screen.dart';
+import 'package:taskmanager/ui/screens/set_password_screen.dart';
 import '../../style/text_style.dart';
 import '../widgets/app_elevated_button.dart';
 import '../widgets/app_text_button.dart';
@@ -70,12 +71,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
               ),
               AppElevatedButton(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const OTPVerificationScreen(),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SetPasswordScreen(),
+                    ),
+                  );
                 },
                 child: const Text('Verifiy'),
               ),
