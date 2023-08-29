@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/ui/screens/main_bottom_navbar.dart';
 import 'package:taskmanager/ui/screens/sign_up_screen.dart';
 import 'package:taskmanager/ui/screens/verify_with_email_screen.dart';
 import 'package:taskmanager/ui/widgets/screen_background.dart';
@@ -48,7 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 16,
               ),
               AppElevatedButton(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainBottomNavBar(),
+                      ),
+                      (route) => false);
+                },
                 child: const Icon(Icons.arrow_circle_right_outlined),
               ),
               const SizedBox(
