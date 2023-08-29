@@ -19,7 +19,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
+            children: [
+              
+            ],
           ),
         ),
       ),

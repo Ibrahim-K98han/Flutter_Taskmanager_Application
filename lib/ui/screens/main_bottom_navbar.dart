@@ -13,7 +13,7 @@ class MainBottomNavBar extends StatefulWidget {
 
 class _MainBottomNavBarState extends State<MainBottomNavBar> {
   int selectedIndex = 0;
-  final List<Widget> screen = [
+  final List<Widget> screen = const [
     NewTaskScreen(),
     InprogressTaskScreen(),
     CompletedTaskScreen(),
@@ -22,7 +22,20 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screen[selectedIndex],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+              tileColor: Colors.green,
+              leading: CircleAvatar(child: Icon(Icons.person)),
+              title: Text('Ibrahim Khan'),
+              subtitle: Text('ibrahim@gmail.com'),
+            ),
+            Expanded(child: screen[selectedIndex]),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.black38,
