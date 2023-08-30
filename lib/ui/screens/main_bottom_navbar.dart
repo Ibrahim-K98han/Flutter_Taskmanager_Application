@@ -4,6 +4,8 @@ import 'package:taskmanager/ui/screens/completed_task_screen.dart';
 import 'package:taskmanager/ui/screens/inprogress_task_screen.dart';
 import 'package:taskmanager/ui/screens/new_task_screen.dart';
 
+import '../widgets/user_profile_widget.dart';
+
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({super.key});
 
@@ -25,13 +27,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       body: SafeArea(
         child: Column(
           children: [
-            const ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-              tileColor: Colors.green,
-              leading: CircleAvatar(child: Icon(Icons.person)),
-              title: Text('Ibrahim Khan'),
-              subtitle: Text('ibrahim@gmail.com'),
-            ),
+            UserProfileWidget(),
             Expanded(child: screen[selectedIndex]),
           ],
         ),
@@ -60,3 +56,5 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
     );
   }
 }
+
+
