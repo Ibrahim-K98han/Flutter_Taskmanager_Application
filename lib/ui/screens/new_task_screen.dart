@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/style/text_style.dart';
 import '../widgets/dashboard_item_widget.dart';
 import '../widgets/screen_background.dart';
+import '../widgets/task_list_item.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
@@ -46,56 +46,18 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               ],
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade100,
-                        border: Border.all(color: Colors.green, width: 1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Title Here',
-                            style: Head16Text,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text('Description Here'),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text('Date:30/8/2023'),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Chip(
-                                label: Text('New'),
-                                backgroundColor: Colors.blue,
-                              ),
-                              Spacer(),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.edit),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.delete),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return TaskListItem(
+                    subject: 'Hello',
+                    description: 'lorem Ipsum Dolder side',
+                    date: '31/08/2023',
+                    type: 'New',
+                    onDeletePress: () {},
+                    onEditPress: () {},
+                  );
+                },
               ),
             )
           ],
@@ -104,3 +66,4 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     );
   }
 }
+

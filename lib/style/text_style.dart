@@ -25,6 +25,12 @@ TextStyle Head12Text = const TextStyle(
     fontFamily: 'Poppins',
     letterSpacing: 0.4,
     fontWeight: FontWeight.w700);
+    TextStyle Head12WithWhiteText = const TextStyle(
+    color: Colors.white,
+    fontSize: 12,
+    fontFamily: 'Poppins',
+    letterSpacing: 0.4,
+    fontWeight: FontWeight.w700);
 
 TextStyle Head24Text = const TextStyle(
     color: Colors.green,
