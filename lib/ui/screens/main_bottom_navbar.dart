@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/ui/screens/add_new_task_screen.dart';
 import 'package:taskmanager/ui/screens/canceled_task_screen.dart';
 import 'package:taskmanager/ui/screens/completed_task_screen.dart';
 import 'package:taskmanager/ui/screens/inprogress_task_screen.dart';
@@ -27,10 +28,22 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
       body: SafeArea(
         child: Column(
           children: [
-            UserProfileWidget(),
+            const UserProfileWidget(),
             Expanded(child: screen[selectedIndex]),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddNewTaskScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.green,
@@ -56,5 +69,3 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
     );
   }
 }
-
-
