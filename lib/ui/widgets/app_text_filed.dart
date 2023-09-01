@@ -7,17 +7,20 @@ class AppTextField extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.controller,
-      this.obsecure});
+      this.obsecure,
+      this.maxLines});
 
   final String? hintText;
   final TextEditingController controller;
   final bool? obsecure;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       obscureText: obsecure ?? false,
+      maxLines: maxLines,
       decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
