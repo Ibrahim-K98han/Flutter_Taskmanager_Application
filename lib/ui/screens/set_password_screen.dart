@@ -38,14 +38,14 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
               AppTextField(
                 hintText: 'Password',
                 controller: TextEditingController(),
-                obsecure: true,
+                obsecureText: true,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: AppTextField(
                   hintText: 'Confirm Password',
                   controller: TextEditingController(),
-                  obsecure: true,
+                  obsecureText: true,
                 ),
               ),
               const SizedBox(

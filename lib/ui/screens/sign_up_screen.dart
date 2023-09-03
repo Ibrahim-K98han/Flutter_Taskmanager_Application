@@ -40,7 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: AppTextField(
                   hintText: 'First Name',
                   controller: TextEditingController(),
-                  obsecure: true,
                 ),
               ),
               Padding(
@@ -48,7 +47,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: AppTextField(
                   hintText: 'Last Name',
                   controller: TextEditingController(),
-                  obsecure: true,
                 ),
               ),
               Padding(
@@ -56,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: AppTextField(
                   hintText: 'Mobile',
                   controller: TextEditingController(),
-                  obsecure: true,
                 ),
               ),
               Padding(
@@ -64,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: AppTextField(
                   hintText: 'Password',
                   controller: TextEditingController(),
-                  obsecure: true,
+                  // obsecure: true,
                 ),
               ),
               const SizedBox(

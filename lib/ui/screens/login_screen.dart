@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: AppTextField(
                   hintText: 'Password',
                   controller: TextEditingController(),
-                  obsecure: true,
+                  //obsecure: true,
                 ),
               ),
               const SizedBox(
