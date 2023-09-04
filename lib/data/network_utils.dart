@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:http/browser_client.dart' as http;
 import 'package:http/http.dart';
 
 class NetworkUtils {
@@ -11,7 +10,7 @@ class NetworkUtils {
       } else if (response.statusCode == 401) {
         print('Unauthorized');
       } else {
-        print('Something went worong');
+        print('Something went wrong ');
       }
     } catch (e) {
       print(e);
@@ -30,7 +29,7 @@ class NetworkUtils {
       } else if (response.statusCode == 401) {
         print('Unauthorized');
       } else {
-        print('Something went worong');
+        print('Something went worong ${response.statusCode}');
       }
     } catch (e) {
       print(e);

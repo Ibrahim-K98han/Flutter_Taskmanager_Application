@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/data/network_utils.dart';
 import 'package:taskmanager/ui/screens/login_screen.dart';
+import 'package:taskmanager/ui/widgets/snackba_message.dart';
 import '../../style/text_style.dart';
 import '../widgets/app_elevated_button.dart';
 import '../widgets/app_text_button.dart';
@@ -29,8 +31,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Join With US',
@@ -43,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: emailETController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Enter your email';
+                      return 'Enter your valid email';
                     }
                     return null;
                   },
@@ -53,45 +55,88 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const EdgeInsets.only(top: 10),
                   child: AppTextField(
                     hintText: 'First Name',
-                    controller: TextEditingController(),
+                    controller: firstNameETController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter your valid first name';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: AppTextField(
                     hintText: 'Last Name',
-                    controller: TextEditingController(),
+                    controller: lastNameETController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter your valid last name';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: AppTextField(
                     hintText: 'Mobile',
-                    controller: TextEditingController(),
+                    controller: mobileETController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter your valid mobile number';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: AppTextField(
+                    obsecureText: true,
                     hintText: 'Password',
-                    controller: TextEditingController(),
-                    // obsecure: true,
+                    controller: passwordETController,
+                    validator: (value) {
+                      if (value!.isEmpty && value.length > 6) {
+                        return 'Enter your valid password';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 const SizedBox(
                   height: 24,
                 ),
                 AppElevatedButton(
-                  onTap: () {
-                    if(_formKey.currentState!.validate()){
-                      
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final result = await NetworkUtils().postMethod(
+                          'https://task.teamrabbil.com/api/v1/registration',
+                          body: {
+                            'email': emailETController.text.trim(),
+                            'mobile': mobileETController.text.trim(),
+                            'password': passwordETController.text,
+                            'firstName': firstNameETController.text.trim(),
+                            'lastName': lastNameETController.text.trim()
+                          });
+                      if (result != null && result['status'] == 'success') {
+                        emailETController.clear();
+                        mobileETController.clear();
+                        passwordETController.clear();
+                        firstNameETController.clear();
+                        lastNameETController.clear();
+                        showSnackBarMessage(context, 'Registration Success');
+                      } else {
+                        showSnackBarMessage(
+                            context, 'Registration Failed! try again', true);
+                      }
+                      print(result);
                     }
                   },
                   child: const Icon(Icons.arrow_circle_right_outlined),
                 ),
                 AppTextButton(
                   onTap: () {
-                    
                     Navigator.push(
                       context,
                       MaterialPageRoute(
