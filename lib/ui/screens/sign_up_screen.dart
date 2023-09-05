@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanager/data/network_utils.dart';
+import 'package:taskmanager/data/urls.dart';
 import 'package:taskmanager/ui/screens/login_screen.dart';
 import 'package:taskmanager/ui/widgets/snackba_message.dart';
 import '../../style/text_style.dart';
@@ -110,15 +111,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 AppElevatedButton(
                   onTap: () async {
                     if (_formKey.currentState!.validate()) {
-                      final result = await NetworkUtils().postMethod(
-                          'https://task.teamrabbil.com/api/v1/registration',
-                          body: {
-                            'email': emailETController.text.trim(),
-                            'mobile': mobileETController.text.trim(),
-                            'password': passwordETController.text,
-                            'firstName': firstNameETController.text.trim(),
-                            'lastName': lastNameETController.text.trim()
-                          });
+                      final result = await NetworkUtils()
+                          .postMethod(Urls.registrationUrl, body: {
+                        'email': emailETController.text.trim(),
+                        'mobile': mobileETController.text.trim(),
+                        'password': passwordETController.text,
+                        'firstName': firstNameETController.text.trim(),
+                        'lastName': lastNameETController.text.trim()
+                      });
                       if (result != null && result['status'] == 'success') {
                         emailETController.clear();
                         mobileETController.clear();
