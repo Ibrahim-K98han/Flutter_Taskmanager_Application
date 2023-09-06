@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:taskmanager/data/auth_utils.dart';
 import 'package:taskmanager/data/network_utils.dart';
 import 'package:taskmanager/data/urls.dart';
 import 'package:taskmanager/ui/screens/main_bottom_navbar.dart';
@@ -22,6 +24,43 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailETController = TextEditingController();
   final TextEditingController _passwordETController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _inProgress = false;
+  Future<void> login() async {
+    setState(() {
+      _inProgress = true;
+    });
+    final result = await NetworkUtils().postMethod(Urls.loginUrl, body: {
+      'email': _emailETController.text.trim(),
+      'password': _passwordETController.text,
+    }, onUnAuthorize: () {
+      showSnackBarMessage(context, 'User Name or password incorrect', true);
+    });
+    setState(() {
+      _inProgress = false;
+    });
+
+    if (result != null && result['status'] == 'success') {
+      await AuthUtils.saveUserData(
+          result['data']['firstName'],
+          result['data']['lastName'],
+          result['token'],
+          result['data']['photo'],
+          result['data']['mobile'],
+          result['data']['emal']);
+      _emailETController.clear();
+      _passwordETController.clear();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MainBottomNavBar(),
+          ),
+          (route) => false);
+      showSnackBarMessage(context, 'Login Success');
+    } else {
+      showSnackBarMessage(context, 'Login Failed! try again', true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,36 +107,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                AppElevatedButton(
-                  onTap: () async {
-                    if (_formKey.currentState!.validate()) {
-                      final result =
-                          await NetworkUtils().postMethod(Urls.loginUrl, body: {
-                        'email': _emailETController.text.trim(),
-                        'password': _passwordETController.text,
-                      }, onUnAuthorize: () {
-                        showSnackBarMessage(
-                            context, 'User Name or password incorrect', true);
-                      });
-
-                      if (result != null && result['status'] == 'success') {
-                        _emailETController.clear();
-                        _passwordETController.clear();
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MainBottomNavBar(),
-                            ),
-                            (route) => false);
-                        showSnackBarMessage(context, 'Login Success');
-                      } else {
-                        showSnackBarMessage(
-                            context, 'Login Failed! try again', true);
-                      }
-                    }
-                  },
-                  child: const Icon(Icons.arrow_circle_right_outlined),
-                ),
+                _inProgress == true
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      )
+                    : AppElevatedButton(
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            login();
+                          }
+                        },
+                        child: const Icon(Icons.arrow_circle_right_outlined),
+                      ),
                 const SizedBox(
                   height: 24,
                 ),
