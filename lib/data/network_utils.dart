@@ -19,11 +19,13 @@ class NetworkUtils {
   }
 
   Future<dynamic> postMethod(String url,
-      {Map<String, String>? body, VoidCallback? onUnAuthorize}) async {
+      {Map<String, String>? body,
+      VoidCallback? onUnAuthorize,
+      String? token}) async {
     try {
       final Response response = await post(
         Uri.parse(url),
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'token': token ?? ''},
         body: jsonEncode(body),
       );
       if (response.statusCode == 200) {

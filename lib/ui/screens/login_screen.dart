@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskmanager/data/auth_utils.dart';
 import 'package:taskmanager/data/network_utils.dart';
 import 'package:taskmanager/data/urls.dart';
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
           result['token'],
           result['data']['photo'],
           result['data']['mobile'],
-          result['data']['emal']);
+          result['data']['email']);
       _emailETController.clear();
       _passwordETController.clear();
       Navigator.pushAndRemoveUntil(

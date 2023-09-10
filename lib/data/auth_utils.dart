@@ -46,4 +46,9 @@ class AuthUtils {
     mobile = sharedPreferences.getString('mobile');
     email = sharedPreferences.getString('email');
   }
+
+  static Future<void> clearData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+  }
 }
