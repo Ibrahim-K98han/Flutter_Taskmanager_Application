@@ -1,20 +1,31 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:taskmanager/data/auth_utils.dart';
+import 'dart:developer';
+import 'package:taskmanager/main.dart';
+import 'package:taskmanager/ui/screens/login_screen.dart';
 
 class NetworkUtils {
-  Future<dynamic> getMethod(String url) async {
+  Future<dynamic> getMethod(String url, {VoidCallback? onUnAuthorize}) async {
     try {
       final Response response = await get(Uri.parse(url));
+      log(response.body);
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else if (response.statusCode == 401) {
-        print('Unauthorized');
+        if (onUnAuthorize != null) {
+          onUnAuthorize();
+        } else {
+          moveToLogin();
+        }
       } else {
-        print('Something went wrong ');
+        log('Something went wrong ');
       }
     } catch (e) {
-      print(e);
+      log(
+        'Error $e',
+      );
     }
   }
 
@@ -33,12 +44,22 @@ class NetworkUtils {
       } else if (response.statusCode == 401) {
         if (onUnAuthorize != null) {
           onUnAuthorize();
+        } else {
+          moveToLogin();
         }
       } else {
-        print('Something went worong ${response.statusCode}');
+        log('Something went worong ${response.statusCode}');
       }
     } catch (e) {
-      print(e);
+      log('Error $e');
     }
+  }
+
+  void moveToLogin() async {
+    await AuthUtils.clearData();
+    Navigator.pushAndRemoveUntil(
+        TaskManager.globalKey.currentContext!,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        (route) => false);
   }
 }
