@@ -9,7 +9,13 @@ import 'package:taskmanager/ui/screens/login_screen.dart';
 class NetworkUtils {
   Future<dynamic> getMethod(String url, {VoidCallback? onUnAuthorize}) async {
     try {
-      final Response response = await get(Uri.parse(url));
+      final Response response = await get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'token': AuthUtils.token ?? ''
+        },
+      );
       log(response.body);
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
@@ -36,7 +42,10 @@ class NetworkUtils {
     try {
       final Response response = await post(
         Uri.parse(url),
-        headers: {'Content-Type': 'application/json', 'token': token ?? ''},
+        headers: {
+          'Content-Type': 'application/json',
+          'token': AuthUtils.token ?? ''
+        },
         body: jsonEncode(body),
       );
       if (response.statusCode == 200) {
