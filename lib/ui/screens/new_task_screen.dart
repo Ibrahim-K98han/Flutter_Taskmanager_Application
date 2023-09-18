@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:taskmanager/data/models/task_model.dart';
 import 'package:taskmanager/data/network_utils.dart';
 import 'package:taskmanager/data/urls.dart';
+import 'package:taskmanager/ui/widgets/app_elevated_button.dart';
 import 'package:taskmanager/ui/widgets/snackba_message.dart';
 import '../widgets/dashboard_item_widget.dart';
 import '../widgets/screen_background.dart';
+import '../widgets/status_change_bottom_sheet.dart';
 import '../widgets/task_list_item.dart';
 
 class NewTaskScreen extends StatefulWidget {
@@ -95,7 +97,13 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                             subject:
                                 newTaskModel.data![index].title ?? 'Unknown',
                             onDeletePress: () {},
-                            onEditPress: () {},
+                            onEditPress: () {
+                              showChangeTaskStatus(
+                                  'New', newTaskModel.data![index].sId ?? '',
+                                  () {
+                                getAllNewTasks();
+                              });
+                            },
                           );
                         },
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanager/ui/widgets/status_change_bottom_sheet.dart';
 import '../../data/models/task_model.dart';
 import '../../data/network_utils.dart';
 import '../../data/urls.dart';
@@ -94,7 +95,13 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
                             subject: completedTaskModel.data![index].title ??
                                 'Unknown',
                             onDeletePress: () {},
-                            onEditPress: () {},
+                            onEditPress: () {
+                              showChangeTaskStatus('Completed',
+                                  completedTaskModel.data![index].sId ?? '',
+                                  () {
+                                getAllCompletedTasks();
+                              });
+                            },
                           );
                         },
                       ),
