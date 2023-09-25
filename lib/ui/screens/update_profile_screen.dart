@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:taskmanager/data/auth_utils.dart';
 import 'package:taskmanager/ui/widgets/app_elevated_button.dart';
 
 import '../../style/text_style.dart';
@@ -14,6 +16,22 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _UpdateProfileScreen extends State<UpdateProfileScreen> {
+  final TextEditingController _emailETController = TextEditingController();
+  final TextEditingController _firstETController = TextEditingController();
+  final TextEditingController _lastETController = TextEditingController();
+  final TextEditingController _mobileETController = TextEditingController();
+  final TextEditingController _passwordETController = TextEditingController();
+  XFile? pickedImage;
+
+  @override
+  void initState() {
+    _emailETController.text = AuthUtils.email ?? '';
+    _firstETController.text = AuthUtils.firstName ?? '';
+    _lastETController.text = AuthUtils.lastName ?? '';
+    _mobileETController.text = AuthUtils.mobile ?? '';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +54,11 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
                       height: 8,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () async {
+                        pickedImage = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+                        if (pickedImage != null) {}
+                      },
                       child: Row(
                         children: [
                           Container(
@@ -60,7 +82,7 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
                                   bottomRight: Radius.circular(8),
                                 ),
                               ),
-                              child: const Text(''),
+                              child: Text(pickedImage?.name ?? ''),
                             ),
                           ),
                         ],
@@ -70,28 +92,29 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
                       height: 24,
                     ),
                     AppTextField(
-                      controller: TextEditingController(),
+                      controller: _emailETController,
+                      readOnly: true,
                       hintText: 'Email',
                     ),
                     const SizedBox(
                       height: 8,
                     ),
                     AppTextField(
-                      controller: TextEditingController(),
+                      controller: _firstETController,
                       hintText: 'First Name',
                     ),
                     const SizedBox(
                       height: 8,
                     ),
                     AppTextField(
-                      controller: TextEditingController(),
+                      controller: _lastETController,
                       hintText: 'Last Name',
                     ),
                     const SizedBox(
                       height: 8,
                     ),
                     AppTextField(
-                      controller: TextEditingController(),
+                      controller: _mobileETController,
                       hintText: 'Mobile',
                     ),
                     const SizedBox(

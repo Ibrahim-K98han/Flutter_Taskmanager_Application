@@ -9,13 +9,16 @@ class AppTextField extends StatelessWidget {
       required this.controller,
       this.obsecureText,
       this.validator,
-      this.maxLines});
+      this.maxLines,
+      this.readOnly
+      });
 
   final String hintText;
   final TextEditingController controller;
   final bool? obsecureText;
   final int? maxLines;
   final Function(String?)? validator;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class AppTextField extends StatelessWidget {
       controller: controller,
       obscureText: obsecureText ?? false,
       maxLines: maxLines ?? 1,
+      readOnly: readOnly ?? false,
       validator: (value) {
         if (validator != null) {
           return validator!(value);

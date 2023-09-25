@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:taskmanager/main.dart';
 import 'package:taskmanager/ui/widgets/snackba_message.dart';
-
 import '../../data/network_utils.dart';
 import '../../data/urls.dart';
 import 'app_elevated_button.dart';
 
-showChangeTaskStatus(String currentStatus,String taskId, VoidCallback onTaskChangeCompleted) {
+showChangeTaskStatus(
+    String currentStatus, String taskId, VoidCallback onTaskChangeCompleted) {
   String statusValue = currentStatus;
   showModalBottomSheet(
     context: TaskManager.globalKey.currentContext!,
@@ -64,8 +64,8 @@ showChangeTaskStatus(String currentStatus,String taskId, VoidCallback onTaskChan
                 child: AppElevatedButton(
                     child: const Text('Change Status'),
                     onTap: () async {
-                      final response = await NetworkUtils()
-                          .getMethod(Urls.changeTaskStatus(taskId, statusValue));
+                      final response = await NetworkUtils().getMethod(
+                          Urls.changeTaskStatus(taskId, statusValue));
                       if (response != null) {
                         onTaskChangeCompleted();
                         Navigator.pop(context);
