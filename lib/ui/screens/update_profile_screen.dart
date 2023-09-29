@@ -32,6 +32,44 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
     super.initState();
   }
 
+  void pickImage() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Pick Image form'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                onTap: () async {
+                  pickedImage =
+                      await ImagePicker().pickImage(source: ImageSource.camera);
+                  if (pickedImage != null) {
+                    setState(() {});
+                  }
+                },
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Camera'),
+              ),
+              ListTile(
+                onTap: () async {
+                  pickedImage = await ImagePicker()
+                      .pickImage(source: ImageSource.gallery);
+                  if (pickedImage != null) {
+                    setState(() {});
+                  }
+                },
+                leading: const Icon(Icons.image),
+                title: const Text('Gallery'),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +92,8 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
                       height: 8,
                     ),
                     InkWell(
-                      onTap: () async {
-                        pickedImage = await ImagePicker()
-                            .pickImage(source: ImageSource.gallery);
-                        if (pickedImage != null) {}
+                      onTap: () {
+                        pickImage();
                       },
                       child: Row(
                         children: [
@@ -82,7 +118,12 @@ class _UpdateProfileScreen extends State<UpdateProfileScreen> {
                                   bottomRight: Radius.circular(8),
                                 ),
                               ),
-                              child: Text(pickedImage?.name ?? ''),
+                              child: Text(
+                                pickedImage?.name ?? '',
+                                maxLines: 1,
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
                           ),
                         ],
