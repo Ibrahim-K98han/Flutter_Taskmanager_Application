@@ -86,15 +86,12 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                                   _inProgress = true;
                                   setState(() {});
                                   final result = await NetworkUtils()
-                                      .postMethod(Urls.createNewTaskUrl,
-                                          token: AuthUtils.token,
-                                          body: {
-                                        "title":
-                                            subjectETController.text.trim(),
-                                        "description":
-                                            descriptionETController.text.trim(),
-                                        "status": "New"
-                                      });
+                                      .postMethod(Urls.createNewTaskUrl, body: {
+                                    "title": subjectETController.text.trim(),
+                                    "description":
+                                        descriptionETController.text.trim(),
+                                    "status": "New"
+                                  });
                                   _inProgress = false;
                                   setState(() {});
                                   print(result);

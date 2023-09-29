@@ -7,7 +7,10 @@ import 'package:taskmanager/main.dart';
 import 'package:taskmanager/ui/screens/login_screen.dart';
 
 class NetworkUtils {
-  Future<dynamic> getMethod(String url, {VoidCallback? onUnAuthorize}) async {
+  Future<dynamic> getMethod(
+    String url, {
+    VoidCallback? onUnAuthorize,
+  }) async {
     try {
       final Response response = await get(
         Uri.parse(url),
@@ -35,10 +38,11 @@ class NetworkUtils {
     }
   }
 
-  Future<dynamic> postMethod(String url,
-      {Map<String, String>? body,
-      VoidCallback? onUnAuthorize,
-      String? token}) async {
+  Future<dynamic> postMethod(
+    String url, {
+    Map<String, String>? body,
+    VoidCallback? onUnAuthorize,
+  }) async {
     try {
       final Response response = await post(
         Uri.parse(url),
