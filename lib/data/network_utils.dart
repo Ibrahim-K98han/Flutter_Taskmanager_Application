@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:taskmanager/app.dart';
 import 'package:taskmanager/data/auth_utils.dart';
 import 'dart:developer';
 import 'package:taskmanager/main.dart';
@@ -71,7 +72,7 @@ class NetworkUtils {
   void moveToLogin() async {
     await AuthUtils.clearData();
     Navigator.pushAndRemoveUntil(
-        TaskManager.globalKey.currentContext!,
+        TaskManagerApp.globalKey.currentContext!,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
         (route) => false);
   }
