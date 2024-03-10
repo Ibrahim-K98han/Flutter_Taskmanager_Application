@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskmanager/main.dart';
+import 'package:taskmanager/app.dart';
 import 'package:taskmanager/ui/widgets/snackba_message.dart';
 import '../../data/network_utils.dart';
 import '../../data/urls.dart';
@@ -9,7 +9,7 @@ showChangeTaskStatus(
     String currentStatus, String taskId, VoidCallback onTaskChangeCompleted) {
   String statusValue = currentStatus;
   showModalBottomSheet(
-    context: TaskManager.globalKey.currentContext!,
+    context: TaskManagerApp.globalKey.currentContext!,
     builder: (context) {
       return StatefulBuilder(
         builder: (context, setState) {
